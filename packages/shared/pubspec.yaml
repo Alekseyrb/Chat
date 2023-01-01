@@ -1,5 +1,5 @@
-name: services
-description: services
+name: shared
+description: shared
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -37,11 +37,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get_it: ^7.2.0
-  firebase_core: ^2.4.0
-  cloud_firestore: ^4.2.0
-  firebase_auth: ^4.2.1
-  shred:
-    path: ../shared
 
 
 dev_dependencies:
