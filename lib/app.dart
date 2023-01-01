@@ -17,6 +17,7 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GetIt.I.get<LoginBloc>()),
+        BlocProvider(create: (context) => GetIt.I.get<RegistrationBloc>()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

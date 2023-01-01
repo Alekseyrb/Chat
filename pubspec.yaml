@@ -53,6 +53,8 @@ dependencies:
     path: packages/blocs
   repositories:
     path: packages/repositories
+  shared:
+    path: packages/shared
 
 dev_dependencies:
   flutter_test:

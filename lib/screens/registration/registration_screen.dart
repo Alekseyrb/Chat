@@ -36,6 +36,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               builder: (context) => const LoginScreen(),
             ),
           );
+          return null;
         },
         orElse: () => null,
       ),

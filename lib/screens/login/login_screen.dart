@@ -1,5 +1,6 @@
 import 'package:blocs/blocs.dart';
 import 'package:chat/screens/home/home_screen.dart';
+import 'package:chat/screens/registration/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController(text: 'oleksiykravchenko9@gmail.com');
+  final _emailController =
+      TextEditingController(text: 'oleksiykravchenko9@gmail.com');
   final _passwordController = TextEditingController(text: '12345678');
 
   @override
@@ -120,6 +122,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 25),
+              alignment: Alignment.center,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegistrationScreen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Зарегестрироваться?',
+                  style: TextStyle(
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
