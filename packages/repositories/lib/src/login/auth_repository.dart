@@ -10,7 +10,26 @@ class AuthRepository {
   Future<UserDataModel> singIn(String email, String password) async {
     final response = await authService.signIn(email, password);
 
-    final result = response?.toSignIn() ??
+    final result = response?.toUser() ??
+        UserDataModel(
+          displayName: '',
+          email: '',
+          emailVerified: false,
+          isAnonymous: false,
+          phoneNumber: '',
+          photoURL: '',
+          refreshToken: '',
+          tenantId: '',
+          uid: '',
+        );
+
+    return result;
+  }
+
+  Future<UserDataModel> registration(String email, String password) async {
+    final response = await authService.registration(email, password);
+
+    final result = response?.toUser() ??
         UserDataModel(
           displayName: '',
           email: '',
@@ -28,7 +47,7 @@ class AuthRepository {
 }
 
 extension on User {
-  UserDataModel toSignIn() {
+  UserDataModel toUser() {
     return UserDataModel(
       displayName: displayName ?? '',
       email: email ?? '',
