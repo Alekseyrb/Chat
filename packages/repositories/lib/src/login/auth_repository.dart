@@ -7,6 +7,12 @@ class AuthRepository {
 
   AuthRepository(this.authService);
 
+  String? _userId;
+
+  String get userId {
+    return _userId ?? '';
+  }
+
   Future<UserDataModel> singIn(String email, String password) async {
     final response = await authService.signIn(email, password);
 
@@ -22,6 +28,8 @@ class AuthRepository {
           tenantId: '',
           uid: '',
         );
+
+    _userId = result.uid;
 
     return result;
   }
