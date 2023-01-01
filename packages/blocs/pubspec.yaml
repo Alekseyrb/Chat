@@ -40,8 +40,15 @@ dependencies:
   get_it: ^7.2.0
   injectable: ^2.1.0
   freezed_annotation: ^2.2.0
+  firebase_core: ^2.4.0
+  cloud_firestore: ^4.2.0
+  firebase_auth: ^4.2.1
   repositories:
     path: ../repositories
+  models:
+    path: ../models
+  shared:
+    path: ../shared
 
 dev_dependencies:
   flutter_test:

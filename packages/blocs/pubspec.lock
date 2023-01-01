@@ -135,7 +135,7 @@ packages:
     source: hosted
     version: "1.1.1"
   cloud_firestore:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
@@ -212,7 +212,7 @@ packages:
     source: hosted
     version: "6.1.4"
   firebase_auth:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
@@ -233,7 +233,7 @@ packages:
     source: hosted
     version: "5.2.4"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -430,7 +430,7 @@ packages:
     source: hosted
     version: "1.0.3"
   models:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../models"
       relative: true
@@ -514,7 +514,7 @@ packages:
     source: path
     version: "1.0.0+1"
   shared:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../shared"
       relative: true
