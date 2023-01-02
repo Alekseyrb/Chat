@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:models/models.dart';
 import 'package:shared/shared.dart';
 
 class FirestoreService {
@@ -46,5 +47,32 @@ class FirestoreService {
 
     result = response.docs;
     return result;
+  }
+
+  Future<void> sendMessage(
+    String content,
+    int type,
+    String groupChatId,
+    String currentUserId,
+    String preeId,
+  ) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    DocumentReference documentReference = firebaseFirestore
+        .collection(FirestoreConstants.pathMessageCollection)
+        .doc(groupChatId)
+        .collection(groupChatId)
+        .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
+    MessageChat messageChat = MessageChat(
+      idFrom: currentUserId,
+      idTo: preeId,
+      timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+      content: content,
+      type: type,
+    );
+
+    FirebaseFirestore.instance.runTransaction((transaction) async {
+      transaction.set(documentReference, messageChat.toJson());
+    });
   }
 }

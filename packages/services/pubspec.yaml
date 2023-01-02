@@ -42,6 +42,8 @@ dependencies:
   firebase_auth: ^4.2.1
   shared:
     path: ../shared
+  models:
+    path: ../models
 
 
 dev_dependencies:
