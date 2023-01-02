@@ -3,6 +3,15 @@ import 'package:models/models.dart';
 import 'package:shared/shared.dart';
 
 class FirestoreService {
+  Future<void> updateDataFirestore(
+      String collectionPath, String path, Map<String, dynamic> dataNeed) {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    return firebaseFirestore
+        .collection(collectionPath)
+        .doc(path)
+        .update(dataNeed);
+  }
+
   Future<List<DocumentSnapshot>> getInfoFirestore(
     String pathCollection,
     int limit,
@@ -54,7 +63,7 @@ class FirestoreService {
     int type,
     String groupChatId,
     String currentUserId,
-    String preeId,
+    String peerId,
   ) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     DocumentReference documentReference = firebaseFirestore
@@ -65,7 +74,7 @@ class FirestoreService {
 
     MessageChat messageChat = MessageChat(
       idFrom: currentUserId,
-      idTo: preeId,
+      idTo: peerId,
       timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
       content: content,
       type: type,

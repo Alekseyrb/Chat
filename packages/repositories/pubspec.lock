@@ -248,7 +248,7 @@ packages:
     source: path
     version: "1.0.0+1"
   shared:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../shared"
       relative: true

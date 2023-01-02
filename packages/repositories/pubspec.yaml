@@ -42,6 +42,8 @@ dependencies:
     path: ../services
   models:
     path: ../models
+  shared:
+    path:  ../shared
 
 dev_dependencies:
   flutter_test:
