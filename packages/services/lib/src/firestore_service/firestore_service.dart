@@ -27,4 +27,24 @@ class FirestoreService {
     }
     return result;
   }
+
+  Future<List<DocumentSnapshot>> getChatMessages(
+    String groupChatId,
+    int limit,
+  ) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    List<DocumentSnapshot> result = [];
+    QuerySnapshot? response;
+
+    response = await firebaseFirestore
+        .collection(FirestoreConstants.pathMessageCollection)
+        .doc(groupChatId)
+        .collection(groupChatId)
+        .orderBy(FirestoreConstants.timestamp, descending: true)
+        .limit(limit)
+        .get();
+
+    result = response.docs;
+    return result;
+  }
 }

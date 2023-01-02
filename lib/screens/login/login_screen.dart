@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                 },
                 child: const Text(
-                  'Войти',
+                  'Login',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
                 child: const Text(
-                  'Зарегестрироваться?',
+                  'Sign up?',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
