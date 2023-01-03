@@ -19,6 +19,7 @@ class _AppState extends State<App> {
         BlocProvider(create: (context) => GetIt.I.get<LoginBloc>()),
         BlocProvider(create: (context) => GetIt.I.get<RegistrationBloc>()),
         BlocProvider(create: (context) => GetIt.I.get<HomeBloc>()..add(const HomeEvent.init())),
+        BlocProvider(create: (context) => GetIt.I.get<ChatBloc>()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -30,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) => state.maybeMap(
         logInSuccess: (value) {
+          _emailController.text = '';
+          _passwordController.text = '';
           Navigator.push(
             context,
             MaterialPageRoute(

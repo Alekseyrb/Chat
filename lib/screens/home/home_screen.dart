@@ -1,4 +1,5 @@
 import 'package:blocs/blocs.dart';
+import 'package:chat/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
@@ -31,7 +32,17 @@ Widget buildItem(BuildContext context, UserChat userChat) {
   return Container(
     margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
     child: TextButton(
-      onPressed: () {},
+      onPressed: () {
+        context.read<ChatBloc>().add(
+              ChatEvent.init(userChat.id),
+            );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ChatScreen(),
+          ),
+        );
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         shape: MaterialStateProperty.all<OutlinedBorder>(
