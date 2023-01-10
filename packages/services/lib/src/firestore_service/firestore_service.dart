@@ -4,24 +4,24 @@ import 'package:shared/shared.dart';
 
 class FirestoreService {
   Future<void> updateDataFirestore(
-      String collectionPath, String path, Map<String, dynamic> dataNeed) {
+      String collectionPath, String path, Map<String, dynamic> dataNeedUpdate) {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     return firebaseFirestore
         .collection(collectionPath)
         .doc(path)
-        .update(dataNeed);
+        .update(dataNeedUpdate);
   }
 
   Future<List<DocumentSnapshot>> getInfoFirestore(
     String pathCollection,
     int limit,
-    String textSearch,
+    String? textSearch,
   ) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     List<DocumentSnapshot> result = [];
     QuerySnapshot response;
 
-    if (textSearch.isNotEmpty) {
+    if (textSearch?.isNotEmpty == true) {
       response = await firebaseFirestore
           .collection(pathCollection)
           .limit(limit)

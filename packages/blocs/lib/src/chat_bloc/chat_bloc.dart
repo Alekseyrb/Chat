@@ -52,6 +52,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
     final currentUserId = authRepository.userId;
 
+    // peerId = event.peerId;
     if (currentUserId.compareTo(peerId) > 0) {
       groupChatId = '$currentUserId-$peerId';
     } else {

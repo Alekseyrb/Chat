@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.peerId,
+          widget.peerNickname,
           style: const TextStyle(color: Colors.amber),
         ),
         centerTitle: true,
