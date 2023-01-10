@@ -17,6 +17,7 @@ part 'chat_bloc.freezed.dart';
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final FirestoreRepository firestoreRepository;
   final AuthRepository authRepository;
+  // final UpdateDateService updateDateService;
   String peerId = '';
 
   ChatBloc(this.firestoreRepository, this.authRepository)
