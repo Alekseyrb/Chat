@@ -10,7 +10,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: buildSearchBar(context),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
+      ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) => state.maybeMap(
           init: (initState) {
@@ -26,6 +35,39 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget buildSearchBar(BuildContext context) {
+  return Container(
+    height: 40,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(16),
+      color: Colors.white,
+    ),
+    padding: const EdgeInsets.fromLTRB(4, 2, 2, 4),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Icon(
+          Icons.search,
+          color: Colors.grey,
+          size: 20,
+        ),
+        const SizedBox(width: 5),
+        Expanded(
+          child: TextFormField(
+            textInputAction: TextInputAction.search,
+            onChanged: (value) {},
+            decoration: const InputDecoration.collapsed(
+              hintText: 'Search nickname (you have to type exactly string',
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+            ),
+            style: const TextStyle(fontSize: 13),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 Widget buildItem(BuildContext context, UserChat userChat) {
