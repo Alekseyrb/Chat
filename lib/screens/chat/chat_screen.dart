@@ -22,6 +22,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController textEditingController = TextEditingController();
   final FocusNode focusNode = FocusNode();
+  bool isShowSticker = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,18 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ),
               ),
-              buildInput(context, textEditingController, focusNode),
+              isShowSticker ? buildSticker(context) : const SizedBox(),
+              buildInput(
+                context,
+                textEditingController,
+                focusNode,
+                () {
+                  focusNode.unfocus();
+                  setState(() {
+                    isShowSticker = !isShowSticker;
+                  });
+                },
+              ),
             ],
           ),
         ],
@@ -93,6 +105,124 @@ bool isLastMessageLeft(int index, String idForm, String currentUserId) {
   } else {
     return false;
   }
+}
+
+Widget buildSticker(BuildContext context) {
+  return Expanded(
+    child: Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.grey, width: 0.5),
+        ),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.all(5),
+      height: 180,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  context.read<ChatBloc>().add(
+                        const ChatEvent.sendMessage(
+                          'mimi1',
+                          TypeMessage.sticker,
+                        ),
+                      );
+                },
+                child: Image.asset(
+                  'assets/images/mimi1.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi2.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi3.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi1.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi2.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi3.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi1.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Image.asset(
+                  'assets/images/mimi2.gif',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+                width: 50,
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 Widget buildItem(BuildContext context, int index, MessageChat messageChat,
@@ -299,8 +429,12 @@ Widget buildItem(BuildContext context, int index, MessageChat messageChat,
   }
 }
 
-Widget buildInput(BuildContext context,
-    TextEditingController textEditingController, FocusNode focusNode) {
+Widget buildInput(
+  BuildContext context,
+  TextEditingController textEditingController,
+  FocusNode focusNode,
+  VoidCallback getSticker,
+) {
   return Container(
     width: double.infinity,
     height: 50,
@@ -332,7 +466,9 @@ Widget buildInput(BuildContext context,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 1),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                getSticker();
+              },
               icon: const Icon(Icons.face),
               color: Colors.black,
             ),
