@@ -19,32 +19,38 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(String text) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function(String text)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(String text)? search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InitHomeEvent value) init,
+    required TResult Function(SearchHomeEvent value) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitHomeEvent value)? init,
+    TResult? Function(SearchHomeEvent value)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InitHomeEvent value)? init,
+    TResult Function(SearchHomeEvent value)? search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -106,6 +112,7 @@ class _$InitHomeEvent implements InitHomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(String text) search,
   }) {
     return init();
   }
@@ -114,6 +121,7 @@ class _$InitHomeEvent implements InitHomeEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function(String text)? search,
   }) {
     return init?.call();
   }
@@ -122,6 +130,7 @@ class _$InitHomeEvent implements InitHomeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(String text)? search,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -134,6 +143,7 @@ class _$InitHomeEvent implements InitHomeEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InitHomeEvent value) init,
+    required TResult Function(SearchHomeEvent value) search,
   }) {
     return init(this);
   }
@@ -142,6 +152,7 @@ class _$InitHomeEvent implements InitHomeEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InitHomeEvent value)? init,
+    TResult? Function(SearchHomeEvent value)? search,
   }) {
     return init?.call(this);
   }
@@ -150,6 +161,7 @@ class _$InitHomeEvent implements InitHomeEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InitHomeEvent value)? init,
+    TResult Function(SearchHomeEvent value)? search,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -161,6 +173,139 @@ class _$InitHomeEvent implements InitHomeEvent {
 
 abstract class InitHomeEvent implements HomeEvent {
   const factory InitHomeEvent() = _$InitHomeEvent;
+}
+
+/// @nodoc
+abstract class _$$SearchHomeEventCopyWith<$Res> {
+  factory _$$SearchHomeEventCopyWith(
+          _$SearchHomeEvent value, $Res Function(_$SearchHomeEvent) then) =
+      __$$SearchHomeEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class __$$SearchHomeEventCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$SearchHomeEvent>
+    implements _$$SearchHomeEventCopyWith<$Res> {
+  __$$SearchHomeEventCopyWithImpl(
+      _$SearchHomeEvent _value, $Res Function(_$SearchHomeEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_$SearchHomeEvent(
+      null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SearchHomeEvent implements SearchHomeEvent {
+  const _$SearchHomeEvent(this.text);
+
+  @override
+  final String text;
+
+  @override
+  String toString() {
+    return 'HomeEvent.search(text: $text)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SearchHomeEvent &&
+            (identical(other.text, text) || other.text == text));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SearchHomeEventCopyWith<_$SearchHomeEvent> get copyWith =>
+      __$$SearchHomeEventCopyWithImpl<_$SearchHomeEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(String text) search,
+  }) {
+    return search(text);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(String text)? search,
+  }) {
+    return search?.call(text);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(String text)? search,
+    required TResult orElse(),
+  }) {
+    if (search != null) {
+      return search(text);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitHomeEvent value) init,
+    required TResult Function(SearchHomeEvent value) search,
+  }) {
+    return search(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitHomeEvent value)? init,
+    TResult? Function(SearchHomeEvent value)? search,
+  }) {
+    return search?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitHomeEvent value)? init,
+    TResult Function(SearchHomeEvent value)? search,
+    required TResult orElse(),
+  }) {
+    if (search != null) {
+      return search(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SearchHomeEvent implements HomeEvent {
+  const factory SearchHomeEvent(final String text) = _$SearchHomeEvent;
+
+  String get text;
+  @JsonKey(ignore: true)
+  _$$SearchHomeEventCopyWith<_$SearchHomeEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:repositories/repositories.dart';
 import 'package:services/services.dart';
+import 'package:shared/shared.dart';
 
 Future<void> initRepositories(GetIt getIt) async {
   getIt.registerFactory(() => AuthRepository(getIt.get<AuthService>()));
@@ -8,6 +9,7 @@ Future<void> initRepositories(GetIt getIt) async {
     () => FirestoreRepository(
       getIt.get<FirestoreService>(),
       getIt.get<AuthRepository>(),
+      getIt.get<UpdateDateService>(),
     ),
   );
 }

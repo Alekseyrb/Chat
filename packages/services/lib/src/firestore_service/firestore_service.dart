@@ -8,6 +8,10 @@ import 'package:models/models.dart';
 import 'package:shared/shared.dart';
 
 class FirestoreService {
+  final UpdateDateService _updateDateService;
+
+  FirestoreService(this._updateDateService);
+
   Future<void> updateDataFirestore(
       String collectionPath, String path, Map<String, dynamic> dataNeedUpdate) {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -88,6 +92,55 @@ class FirestoreService {
     FirebaseFirestore.instance.runTransaction((transaction) async {
       transaction.set(documentReference, messageChat.toJson());
     });
+  }
+
+  Future uploadFileUser(
+    File image,
+    String fileName,
+    String userId,
+  ) async {
+    UploadTask uploadTask = uploadFile(image, fileName);
+    String photoUrl = '';
+    try {
+      TaskSnapshot snapshot = await uploadTask;
+      photoUrl = await snapshot.ref.getDownloadURL();
+      UserChat updateInfo = UserChat(
+        id: userId,
+        photoUrl: photoUrl,
+        nickName: _updateDateService.nickname,
+        aboutMe: _updateDateService.aboutMe,
+      );
+      _updateDateService.photoUrl = photoUrl;
+      updateDataFirestore(FirestoreConstants.pathUserCollection, userId,
+              updateInfo.toJson())
+          .then((data) async {
+        Fluttertoast.showToast(msg: 'Upload success');
+      }).catchError((err) {
+        Fluttertoast.showToast(msg: err.toString());
+      });
+    } on FirebaseException catch (e) {
+      Fluttertoast.showToast(msg: e.message ?? e.toString());
+    }
+  }
+
+  Future getImageUser(String userId) async {
+    ImagePicker imagePicker = ImagePicker();
+    XFile? pickedFile;
+
+    pickedFile = await imagePicker
+        .pickImage(source: ImageSource.gallery)
+        .catchError((err) {
+      Fluttertoast.showToast(msg: err.toString());
+    });
+    File? image;
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+    }
+    if (image != null) {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      return uploadFileUser(image, fileName, userId);
+    }
+    return;
   }
 
   Future getImage(
