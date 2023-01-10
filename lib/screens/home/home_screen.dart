@@ -1,5 +1,6 @@
 import 'package:blocs/blocs.dart';
 import 'package:chat/screens/chat/chat_screen.dart';
+import 'package:chat/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
@@ -15,7 +16,15 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<ProfileBloc>().add(const ProfileEvent.init());
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
             icon: const Icon(Icons.more_vert),
           ),
         ],
