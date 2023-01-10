@@ -39,4 +39,9 @@ class FirestoreRepository {
     return firestoreService.sendMessage(
         content, type, groupChatId, currentUserId, peerId);
   }
+
+  Future<void> getImage(
+      int type, String groupChatId, String currentUserId, String peerId) async {
+    return firestoreService.getImage(type, groupChatId, currentUserId, peerId);
+  }
 }

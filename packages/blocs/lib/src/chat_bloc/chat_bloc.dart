@@ -59,6 +59,23 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       groupChatId = '$peerId-$currentUserId';
     }
 
+    if (event.type == 0) {
+      await firestoreRepository.sendMessage(
+        event.content,
+        event.type,
+        groupChatId,
+        currentUserId,
+        peerId,
+      );
+    } else if (event.type == 1) {
+      await firestoreRepository.getImage(
+        event.type,
+        groupChatId,
+        currentUserId,
+        peerId,
+      );
+    }
+
     await firestoreRepository.sendMessage(
       event.content,
       event.type,
@@ -71,8 +88,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         FirestoreConstants.pathUserCollection,
         currentUserId,
         {FirestoreConstants.chattingWith: peerId});
+
     final result = await firestoreRepository.getChatMessages(groupChatId, 20);
+
     emit(const ChatState.loading());
+
     emit(ChatState.init(currentUserId: currentUserId, listMessages: result));
   }
 }

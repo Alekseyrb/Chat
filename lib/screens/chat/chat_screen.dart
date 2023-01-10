@@ -314,7 +314,14 @@ Widget buildInput(BuildContext context,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 1),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<ChatBloc>().add(
+                      ChatEvent.sendMessage(
+                        textEditingController.text,
+                        TypeMessage.image,
+                      ),
+                    );
+              },
               icon: const Icon(Icons.image),
               color: Colors.black,
             ),
