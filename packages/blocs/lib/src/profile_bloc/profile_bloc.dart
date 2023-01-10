@@ -23,6 +23,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       : super(const ProfileState.loading()) {
     on<InitProfileEvent>(_init);
     on<GetImageUserProfileEvent>(_getImageUser);
+    on<UpdateInfoProfileEvent>(_updateInfo);
   }
 
   Future<void> _init(InitProfileEvent event, Emitter<ProfileState> emit) async {
@@ -48,5 +49,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     emit(const ProfileState.loading());
     emit(ProfileState.init(user: result));
+  }
+
+  Future<void> _updateInfo(UpdateInfoProfileEvent event, Emitter<ProfileState> emit) async {
+    await firestoreRepository.updateInfo(event.nickname, event.aboutMe);
   }
 }
