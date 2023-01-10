@@ -20,6 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc(this.firestoreRepository) : super(const HomeState.loading()) {
     on<InitHomeEvent>(_init);
+    on<SearchHomeEvent>(_search);
   }
 
   Future<void> _init(InitHomeEvent event, Emitter<HomeState> emit) async {
@@ -27,6 +28,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       FirestoreConstants.pathUserCollection,
       20,
       '',
+    );
+
+    emit(HomeState.init(listUser: result));
+  }
+
+  Future<void> _search(SearchHomeEvent event, Emitter<HomeState> emit) async {
+    final result = await firestoreRepository.getInfoFirestore(
+      FirestoreConstants.pathUserCollection,
+      20,
+      event.text,
     );
 
     emit(HomeState.init(listUser: result));

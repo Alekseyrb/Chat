@@ -57,7 +57,9 @@ Widget buildSearchBar(BuildContext context) {
         Expanded(
           child: TextFormField(
             textInputAction: TextInputAction.search,
-            onChanged: (value) {},
+            onChanged: (value) {
+              context.read<HomeBloc>().add(HomeEvent.search(value));
+            },
             decoration: const InputDecoration.collapsed(
               hintText: 'Search nickname (you have to type exactly string',
               hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
