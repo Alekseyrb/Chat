@@ -9,8 +9,8 @@ Future<void> initBloc(GetIt getIt) async {
   getIt.registerSingleton(HomeBloc(getIt.get<FirestoreRepository>()));
   getIt.registerSingleton(ChatBloc(
     getIt.get<FirestoreRepository>(),
-    getIt.get<AuthRepository>(),
-    // getIt.get<UpdateDateService>(),
+    getIt.get<UpdateDateService>(),
+    // getIt.get<AuthRepository>(),
   ));
   getIt.registerSingleton(ProfileBloc(
       getIt.get<FirestoreRepository>(), getIt.get<UpdateDateService>()));

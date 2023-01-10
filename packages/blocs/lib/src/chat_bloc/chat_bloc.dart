@@ -16,11 +16,14 @@ part 'chat_bloc.freezed.dart';
 @injectable
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final FirestoreRepository firestoreRepository;
-  final AuthRepository authRepository;
-  // final UpdateDateService updateDateService;
+  final UpdateDateService updateDateService;
+  // final AuthRepository authRepository;
   String peerId = '';
 
-  ChatBloc(this.firestoreRepository, this.authRepository)
+  ChatBloc(
+      this.firestoreRepository,
+      // this.authRepository,
+      this.updateDateService)
       : super(const ChatState.loading()) {
     on<InitChatEvent>(_init);
     on<SendMessageChatEvent>(_sendMessage);
@@ -29,7 +32,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Future<void> _init(InitChatEvent event, Emitter<ChatState> emit) async {
     String groupChatId = '';
 
-    final currentUserId = authRepository.userId;
+    final currentUserId = updateDateService.userId;
 
     peerId = event.peerId;
     if (currentUserId.compareTo(peerId) > 0) {
@@ -51,7 +54,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       SendMessageChatEvent event, Emitter<ChatState> emit) async {
     String groupChatId = '';
 
-    final currentUserId = authRepository.userId;
+    final currentUserId = updateDateService.userId;
 
     // peerId = event.peerId;
     if (currentUserId.compareTo(peerId) > 0) {

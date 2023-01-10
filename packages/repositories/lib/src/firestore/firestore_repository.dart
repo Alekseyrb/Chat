@@ -76,4 +76,8 @@ class FirestoreRepository {
   Future<void> getImageUser() async {
     await firestoreService.getImageUser(updateDateService.userId);
   }
+
+  Future<void> updateInfo(String nickname, String aboutMe) async {
+    await firestoreService.updateInfo(nickname, aboutMe);
+  }
 }

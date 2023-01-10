@@ -161,6 +161,26 @@ class FirestoreService {
     }
   }
 
+  Future updateInfo(String nickname, String aboutMe) async {
+    try {
+      UserChat updateInfo = UserChat(
+        id: _updateDateService.userId,
+        photoUrl: _updateDateService.photoUrl,
+        nickName: nickname,
+        aboutMe: aboutMe,
+      );
+      updateDataFirestore(FirestoreConstants.pathUserCollection, _updateDateService.userId,
+          updateInfo.toJson())
+          .then((data) async {
+        Fluttertoast.showToast(msg: 'Upload success');
+      }).catchError((err) {
+        Fluttertoast.showToast(msg: err.toString());
+      });
+    } on FirebaseException catch (e) {
+      Fluttertoast.showToast(msg: e.message ?? e.toString());
+    }
+  }
+
   UploadTask uploadFile(File image, String fileName) {
     FirebaseStorage firebaseStorage = FirebaseStorage.instance;
     Reference reference = firebaseStorage.ref().child(fileName);
