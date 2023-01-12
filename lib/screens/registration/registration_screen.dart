@@ -53,7 +53,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 120,
                 alignment: Alignment.center,
                 child: const Text(
-                  'Регистрация',
+                  'Registration',
                   style: TextStyle(
                     color: Colors.orange,
                     fontSize: 50,
@@ -149,7 +149,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         );
                   },
                   child: const Text(
-                    'Зарегистрировать',
+                    'Registration',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
