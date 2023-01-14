@@ -12,14 +12,14 @@ class FirestoreService {
 
   FirestoreService(this._updateDateService);
 
-  Future<void> updateDataFirestore(
-      String collectionPath, String path, Map<String, dynamic> dataNeedUpdate) {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    return firebaseFirestore
-        .collection(collectionPath)
-        .doc(path)
-        .update(dataNeedUpdate);
-  }
+  // Future<void> updateDataFirestore(
+  //     String collectionPath, String path, Map<String, dynamic> dataNeedUpdate) {
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   return firebaseFirestore
+  //       .collection(collectionPath)
+  //       .doc(path)
+  //       .update(dataNeedUpdate);
+  // }
 
   Future<List<DocumentSnapshot>> getInfoFirestore(
     String pathCollection,
@@ -101,7 +101,7 @@ class FirestoreService {
   ) async {
     UploadTask uploadTask = uploadFile(image, fileName);
     String photoUrl = '';
-    try {
+    // try {
       TaskSnapshot snapshot = await uploadTask;
       photoUrl = await snapshot.ref.getDownloadURL();
       UserChat updateInfo = UserChat(
@@ -111,16 +111,16 @@ class FirestoreService {
         aboutMe: _updateDateService.aboutMe,
       );
       _updateDateService.photoUrl = photoUrl;
-      updateDataFirestore(FirestoreConstants.pathUserCollection, userId,
-              updateInfo.toJson())
-          .then((data) async {
-        Fluttertoast.showToast(msg: 'Upload success');
-      }).catchError((err) {
-        Fluttertoast.showToast(msg: err.toString());
-      });
-    } on FirebaseException catch (e) {
-      Fluttertoast.showToast(msg: e.message ?? e.toString());
-    }
+    //   updateDataFirestore(FirestoreConstants.pathUserCollection, userId,
+    //           updateInfo.toJson())
+    //       .then((data) async {
+    //     Fluttertoast.showToast(msg: 'Upload success');
+    //   }).catchError((err) {
+    //     Fluttertoast.showToast(msg: err.toString());
+    //   });
+    // } on FirebaseException catch (e) {
+    //   Fluttertoast.showToast(msg: e.message ?? e.toString());
+    // }
   }
 
   Future getImageUser(String userId) async {
@@ -162,23 +162,23 @@ class FirestoreService {
   }
 
   Future updateInfo(String nickname, String aboutMe) async {
-    try {
+    // try {
       UserChat updateInfo = UserChat(
         id: _updateDateService.userId,
         photoUrl: _updateDateService.photoUrl,
         nickName: nickname,
         aboutMe: aboutMe,
       );
-      updateDataFirestore(FirestoreConstants.pathUserCollection, _updateDateService.userId,
-          updateInfo.toJson())
-          .then((data) async {
-        Fluttertoast.showToast(msg: 'Upload success');
-      }).catchError((err) {
-        Fluttertoast.showToast(msg: err.toString());
-      });
-    } on FirebaseException catch (e) {
-      Fluttertoast.showToast(msg: e.message ?? e.toString());
-    }
+    //   updateDataFirestore(FirestoreConstants.pathUserCollection, _updateDateService.userId,
+    //       updateInfo.toJson())
+    //       .then((data) async {
+    //     Fluttertoast.showToast(msg: 'Upload success');
+    //   }).catchError((err) {
+    //     Fluttertoast.showToast(msg: err.toString());
+    //   });
+    // } on FirebaseException catch (e) {
+    //   Fluttertoast.showToast(msg: e.message ?? e.toString());
+    // }
   }
 
   UploadTask uploadFile(File image, String fileName) {

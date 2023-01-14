@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:models/models.dart';
 import 'package:repositories/repositories.dart';
 import 'package:services/services.dart';
@@ -8,8 +9,15 @@ class FirestoreRepository {
   final AuthRepository authRepository;
   final UpdateDateService updateDateService;
 
+  //new
+  // final FirebaseFirestore firebaseFirestore;
+
   FirestoreRepository(
-      this.firestoreService, this.authRepository, this.updateDateService);
+    this.firestoreService,
+    this.authRepository,
+    this.updateDateService,
+    // this.firebaseFirestore,
+  );
 
   Future<List<UserChat>> getInfoFirestore(
     String pathCollection,
@@ -56,11 +64,36 @@ class FirestoreRepository {
         response.map((item) => MessageChat.fromDocument(item))).toList();
   }
 
-  Future<void> updateDataFirestore(String collectionPath, String docPath,
-      Map<String, dynamic> dataNeedUpdate) {
-    return firestoreService.updateDataFirestore(
-        collectionPath, docPath, dataNeedUpdate);
-  }
+  // Future<void> updateDataFirestore(String collectionPath, String docPath,
+  //     Map<String, dynamic> dataNeedUpdate) {
+  //   return firestoreService.updateDataFirestore(
+  //       collectionPath, docPath, dataNeedUpdate);
+  // }
+
+  // new
+  // Future<void> upDataFirestore(
+  //     String collectionPath, String path, Map<String, String> dataNeedUpdate) {
+  //   return firebaseFirestore
+  //       .collection(collectionPath)
+  //       .doc(path)
+  //       .update(dataNeedUpdate);
+  // }
+  //
+  // Stream<QuerySnapshot> getStreamFireStore(
+  //     String pathCollection, int limit, String? textSearch) {
+  //   if (textSearch?.isNotEmpty == true) {
+  //     return firebaseFirestore
+  //         .collection(pathCollection)
+  //         .limit(limit)
+  //         .where(FirestoreConstants.nickName, isEqualTo: textSearch)
+  //         .snapshots();
+  //   } else {
+  //     return firebaseFirestore
+  //         .collection(pathCollection)
+  //         .limit(limit)
+  //         .snapshots();
+  //   }
+  // }
 
   Future<void> sendMessage(String content, int type, String groupChatId,
       String currentUserId, String peerId) async {

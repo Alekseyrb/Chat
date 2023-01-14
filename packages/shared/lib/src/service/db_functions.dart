@@ -18,15 +18,13 @@ Future openDB() async{
 }
 
 void deleteDB() async{
-  // Get a location using getDatabasesPath
   String databasesPath = await getDatabasesPath();
   // String path = join(databasesPath, '$_dbName.db');
-  // Delete the database
   // await deleteDatabase(path);
 }
-//---------------DDL functions
 
-//return true if success
+
+
 Future<bool> createTable(String tableName, String attributesDefentions) async{
   try{
     _db.execute("create table $tableName  ($attributesDefentions)");
@@ -40,12 +38,10 @@ Future deleteTable(String tableName) async{
   _db.execute("drop table $tableName");
 }
 
-//------------DML functions
 
-//insertion should be in form TABLE(ATTR1 , ATTR2) -- ("val1" , "val2")
+
 Future<bool> insertToDB(String tableName, String values) async{
   try{
-    // Insert some records in a transaction
     await _db.transaction((txn) async {
       int id1 = await txn.rawInsert(
           'INSERT INTO $tableName VALUES(' + values +')');
@@ -59,7 +55,6 @@ Future<bool> insertToDB(String tableName, String values) async{
 }
 
 Future updateDB(String tableName, String values , String conditions) async{
-  // Update some record
   int count = await _db.rawUpdate(
     'UPDATE $tableName SET $values WHERE $conditions' , );
   return count ;

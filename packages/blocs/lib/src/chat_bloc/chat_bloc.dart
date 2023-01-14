@@ -41,10 +41,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       groupChatId = '$peerId-$currentUserId';
     }
 
-    firestoreRepository.updateDataFirestore(
-        FirestoreConstants.pathUserCollection,
-        currentUserId,
-        {FirestoreConstants.chattingWith: peerId});
+    // firestoreRepository.updateDataFirestore(
+    //     FirestoreConstants.pathUserCollection,
+    //     currentUserId,
+    //     {FirestoreConstants.chattingWith: peerId});
     final result = await firestoreRepository.getChatMessages(groupChatId, 20);
 
     emit(ChatState.init(currentUserId: currentUserId, listMessages: result));
@@ -88,10 +88,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       peerId,
     );
 
-    firestoreRepository.updateDataFirestore(
-        FirestoreConstants.pathUserCollection,
-        currentUserId,
-        {FirestoreConstants.chattingWith: peerId});
+    // firestoreRepository.updateDataFirestore(
+    //     FirestoreConstants.pathUserCollection,
+    //     currentUserId,
+    //     {FirestoreConstants.chattingWith: peerId});
 
     final result = await firestoreRepository.getChatMessages(groupChatId, 20);
 

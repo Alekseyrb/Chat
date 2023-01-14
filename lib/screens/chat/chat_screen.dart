@@ -149,100 +149,105 @@ Widget buildSticker(BuildContext context) {
   );
 }
 
+
 Widget buildItem(BuildContext context, int index, MessageChat messageChat,
     String currentUserId, String peerAvatar) {
   if (messageChat.idFrom == currentUserId) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+    return Column(
       children: [
-        messageChat.type == TypeMessage.text
-            ? Container(
-                padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-                width: 200,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(8)),
-                margin: EdgeInsets.only(
-                  bottom: isLastMessageRight(
-                          index, messageChat.idFrom, currentUserId)
-                      ? 20
-                      : 10,
-                  right: 10,
-                ),
-                child: Text(
-                  messageChat.content,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              )
-            : messageChat.type == TypeMessage.image
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            messageChat.type == TypeMessage.text
                 ? Container(
+                    padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                    width: 200,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(8)),
                     margin: EdgeInsets.only(
-                        bottom: isLastMessageRight(
-                                index, messageChat.idFrom, currentUserId)
-                            ? 20
-                            : 10,
-                        right: 10),
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsets>(
-                              const EdgeInsets.all(0))),
-                      child: Material(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8)),
-                        clipBehavior: Clip.hardEdge,
-                        child: Image.network(
-                          messageChat.content,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
-                                ),
-                              ),
-                              width: 200,
-                              height: 200,
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.grey,
-                                  value: loadingProgress.expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes!
-                                      : null,
-                                ),
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(
-                              Icons.account_circle,
-                              size: 35,
-                              color: Colors.grey,
-                            );
-                          },
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      bottom: isLastMessageRight(
+                              index, messageChat.idFrom, currentUserId)
+                          ? 20
+                          : 10,
+                      right: 10,
+                    ),
+                    child: Text(
+                      messageChat.content,
+                      style: const TextStyle(color: Colors.white),
                     ),
                   )
-                : Container(
-                    margin: EdgeInsets.only(
-                        bottom: isLastMessageRight(
-                                index, messageChat.idFrom, currentUserId)
-                            ? 20
-                            : 10,
-                        right: 10),
-                    child: const Icon(
-                      Icons.account_circle,
-                      size: 35,
-                      color: Colors.grey,
-                    ),
-                  ),
+                : messageChat.type == TypeMessage.image
+                    ? Container(
+                        margin: EdgeInsets.only(
+                            bottom: isLastMessageRight(
+                                    index, messageChat.idFrom, currentUserId)
+                                ? 20
+                                : 10,
+                            right: 10),
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  const EdgeInsets.all(0))),
+                          child: Material(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            clipBehavior: Clip.hardEdge,
+                            child: Image.network(
+                              messageChat.content,
+                              loadingBuilder: (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8),
+                                    ),
+                                  ),
+                                  width: 200,
+                                  height: 200,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.grey,
+                                      value: loadingProgress.expectedTotalBytes !=
+                                              null
+                                          ? loadingProgress.cumulativeBytesLoaded /
+                                              loadingProgress.expectedTotalBytes!
+                                          : null,
+                                    ),
+                                  ),
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(
+                                  Icons.account_circle,
+                                  size: 35,
+                                  color: Colors.grey,
+                                );
+                              },
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        margin: EdgeInsets.only(
+                            bottom: isLastMessageRight(
+                                    index, messageChat.idFrom, currentUserId)
+                                ? 20
+                                : 10,
+                            right: 10),
+                        child: const Icon(
+                          Icons.account_circle,
+                          size: 35,
+                          color: Colors.grey,
+                        ),
+                      ),
+          ],
+        ),
       ],
     );
   } else {
